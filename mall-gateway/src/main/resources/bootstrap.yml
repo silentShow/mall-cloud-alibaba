@@ -3,7 +3,7 @@ server:
 spring:
   profiles:
     # dev 默认为开发环境 , prod 线上环境
-    active: prod
+    active: dev
   application:
     name: mall-gateway
   cloud:
@@ -31,3 +31,22 @@ spring:
             allowedMethods: "*"
             allowedHeaders: "*"
             allow-credentials: true
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mall-portal-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: Bearer  #JWT负载中拿到开头
+
+
+# 自定义redis key
+redis:
+  member: 'mall:ums:member:'
+  database: mall
+  key:
+    authCode: 'ums:authCode'
+    orderId: 'oms:orderId'
+    member: 'ums:member'
+    token: 'ums:token'
+  expire:
+    authCode: 90 # 验证码超期时间
+    common: 86400 # 24小时
